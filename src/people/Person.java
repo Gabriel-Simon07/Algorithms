@@ -1,6 +1,6 @@
 package people;
 
-public class Person {
+public abstract class Person {
 	double annualIncome;
 	String name;
 	
@@ -26,4 +26,6 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public abstract double tax();
 }

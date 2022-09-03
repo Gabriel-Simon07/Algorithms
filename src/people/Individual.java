@@ -3,7 +3,8 @@ package people;
 public class Individual extends Person {
 	double healthSpending;
 
-	public Individual() {}
+	public Individual() {
+	}
 
 	public Individual(double annualIncome, String name, double healthSpending) {
 		super(annualIncome, name);
@@ -17,14 +18,15 @@ public class Individual extends Person {
 	public void setHealthSpending(double healthSpending) {
 		this.healthSpending = healthSpending;
 	}
-	
-	public double caculateAnnualIncome() {
-		if(annualIncome < 20000) {
-			return annualIncome * 0.15;
+
+	@Override
+	public double tax() {
+		double basicTax = getAnnualIncome() < 2000 ? getAnnualIncome() * 0.15 : getAnnualIncome() * 0.25;
+		basicTax -= getAnnualIncome() * 0.5;
+		if (basicTax < 0) {
+			return 0.0;
+		} else {
+			return basicTax;
 		}
-		if(annualIncome > 20000) {
-			return annualIncome * 0.25;
-		}
-		return annualIncome * 0.50;
 	}
 }
