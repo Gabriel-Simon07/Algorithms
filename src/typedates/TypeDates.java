@@ -1,5 +1,7 @@
 package typedates;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -8,14 +10,19 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TypeDates {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		DateTimeFormatter dateTimeFormatter3 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.systemDefault());
-
+		
+		SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
 		LocalDate date1 = LocalDate.now();
 		System.out.println(date1);
 		
@@ -76,5 +83,29 @@ public class TypeDates {
 		
 		Duration duration = Duration.between(pastWeekLocalDate1.atStartOfDay(), date4.atStartOfDay());
 		System.out.println(duration.toDays());
+	
+		Date date12 = simpleDateFormat1.parse("21/11/2022");
+		System.out.println(simpleDateFormat1.format(date12));
+		
+		Date date13 = simpleDateFormat2.parse("21/11/2022 15:42:02");
+		System.out.println(simpleDateFormat2.format(date13));
+		
+		Date dateMilli = new Date(System.currentTimeMillis());
+		System.out.println(dateMilli);
+		
+		Date dateMilliZero = new Date(0L);
+		System.out.println(dateMilliZero);
+		
+		Date date14 = Date.from(Instant.parse("2022-11-21T20:35:35Z"));
+		System.out.println(simpleDateFormat2.format(date14));
+	
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date14);
+		cal.add(Calendar.HOUR_OF_DAY, 4);
+		date14 = cal.getTime();
+		System.out.println(date14);
+	
+		int minutesDate14 = cal.get(Calendar.MINUTE);
+		System.out.println(minutesDate14);
 	}
 }
