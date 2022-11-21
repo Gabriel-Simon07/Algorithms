@@ -1,11 +1,13 @@
 package typedates;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class TypeDates {
 	public static void main(String[] args) {
@@ -50,7 +52,29 @@ public class TypeDates {
 		System.out.println(dateTimeFormatter1.format(date11));
 		
 		System.out.println(dateTimeFormatter2.format(date5));
-		
+
 		System.out.println(dateTimeFormatter3.format(date6));
+		
+		LocalDate localDate1 = LocalDate.ofInstant(date6, ZoneId.systemDefault());
+		System.out.println(localDate1);
+
+		LocalDate localDate2 = LocalDate.ofInstant(date6, ZoneId.of("Portugal"));
+		System.out.println(localDate2);
+		
+		System.out.println(date4.getDayOfMonth());
+		
+		LocalDate pastWeekLocalDate1 = date4.minusDays(7);
+		System.out.println(pastWeekLocalDate1);
+		
+		LocalDate pastWeekLocalDate2 = date4.plusDays(7);
+		System.out.println(pastWeekLocalDate2);
+		
+		Instant pastWeekInstant = date3.minus(7, ChronoUnit.DAYS);
+		System.out.println(pastWeekInstant);
+		
+//		Duration duration = Duration.between(pastWeekLocalDate1.atTime(0, 0), date4.atTime(0, 0));
+		
+		Duration duration = Duration.between(pastWeekLocalDate1.atStartOfDay(), date4.atStartOfDay());
+		System.out.println(duration.toDays());
 	}
 }
