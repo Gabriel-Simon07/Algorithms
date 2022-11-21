@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class TypeDates {
@@ -11,6 +12,7 @@ public class TypeDates {
 		
 		DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		DateTimeFormatter dateTimeFormatter3 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").withZone(ZoneId.systemDefault());
 
 		LocalDate date1 = LocalDate.now();
 		System.out.println(date1);
@@ -44,5 +46,11 @@ public class TypeDates {
 		
 		LocalDateTime date11 = LocalDateTime.of(2022, 11, 20, 14, 54);
 		System.out.println(date11);
+		
+		System.out.println(dateTimeFormatter1.format(date11));
+		
+		System.out.println(dateTimeFormatter2.format(date5));
+		
+		System.out.println(dateTimeFormatter3.format(date6));
 	}
 }
